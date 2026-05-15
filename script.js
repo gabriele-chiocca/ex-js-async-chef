@@ -2,6 +2,10 @@ async function getChefBirthday(id) {
   try {
     const responseRicetta = await fetch(`https://dummyjson.com/recipes/${id}`);
 
+    if (!responseRicetta.ok) {
+      throw new Error('Ricetta non trovata');
+    }
+
     const ricetta = await responseRicetta.json();
 
     const userId = ricetta.userId;
@@ -10,13 +14,17 @@ async function getChefBirthday(id) {
       `https://dummyjson.com/users/${userId}`,
     );
 
+    if (!responseChefInfo.ok) {
+      throw new Error('Data non trovata');
+    }
+
     const chefInfo = await responseChefInfo.json();
 
     const dateOfBirthdayChef = chefInfo.birthDate;
 
     return dateOfBirthdayChef;
   } catch (error) {
-    console.error("L'errore è", error.message);
+    throw new Error(error);
   }
 }
 
@@ -27,10 +35,10 @@ async function getChefBirthday(id) {
 
 (async () => {
   try {
-    const birthday = await getChefBirthday(1);
+    const birthday = await getChefBirthday(1000);
 
     console.log('la data di nascia dello chef è:', birthday);
   } catch (errore) {
-    throw new Error("L'errore è questo", errore);
+    console.error("L'errore è", errore.message);
   }
 })();
