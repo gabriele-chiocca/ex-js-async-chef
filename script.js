@@ -5,7 +5,11 @@ async function getChefBirthday(id) {
 
   const userId = ricetta.userId;
 
-  console.log(userId);
+  const responseChefInfo = await fetch(`https://dummyjson.com/users/${userId}`);
+
+  const chefInfo = await responseChefInfo.json();
+
+  console.log(chefInfo);
 
   return ricetta;
 }
