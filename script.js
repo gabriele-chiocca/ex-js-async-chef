@@ -9,9 +9,9 @@ async function getChefBirthday(id) {
 
   const chefInfo = await responseChefInfo.json();
 
-  console.log(chefInfo);
+  const dateOfBirthdayChef = chefInfo.birthDate;
 
-  return ricetta;
+  return dateOfBirthdayChef;
 }
 
 getChefBirthday(1);
