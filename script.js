@@ -14,4 +14,7 @@ async function getChefBirthday(id) {
   return dateOfBirthdayChef;
 }
 
-getChefBirthday(1);
+getChefBirthday(1)
+  .then((birthday) => console.log('La data di nascita dello chef è:', birthday))
+  .catch((errore) => console.error(errore))
+  .finally((messaggio) => console.log('Operazione conclusa'));
